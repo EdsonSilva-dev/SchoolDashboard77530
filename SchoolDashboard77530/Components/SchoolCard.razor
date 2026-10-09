@@ -1,0 +1,49 @@
+﻿@using SchoolDashboard77530.Models
+
+<div class="card h-100">
+    <div class="card-body">
+        <h5 class="card-title">@School.SchoolName</h5>
+
+        <p class="card-text">
+            <strong>School ID:</strong> @School.SchoolId
+        </p>
+
+        <p class="card-text">
+            <strong>Address:</strong> @School.Address
+        </p>
+
+        <p class="card-text">
+            <strong>Phone:</strong> @School.PhoneNo
+        </p>
+
+        <p class="card-text">
+            <strong>Email:</strong> @School.EmailAddress
+        </p>
+
+        <p class="card-text">
+            <strong>Proprietor:</strong> @School.ProprietorFullName
+        </p>
+
+        <p class="card-text">
+            <strong>Head:</strong> @School.HeadFullName
+        </p>
+
+        <button class="btn btn-primary"
+                @onclick="SelectSchool">
+            View Details
+        </button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public SchoolDashboard77530.Models.School School { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<SchoolDashboard77530.Models.School> OnSelect { get; set; }
+
+    private async Task SelectSchool()
+    {
+        await OnSelect.InvokeAsync(School);
+    }
+}

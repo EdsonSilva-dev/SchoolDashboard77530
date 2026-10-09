@@ -1,4 +1,5 @@
 ﻿@page "/schools"
+@rendermode InteractiveServer
 
 @using SchoolDashboard77530.Models
 @using SchoolDashboard77530.Services
@@ -22,53 +23,39 @@ else
         @foreach (var school in schools)
         {
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            @school.SchoolName
-                        </h5>
-
-                        <p class="card-text">
-                            <strong>School ID:</strong>
-                            @school.SchoolId
-                        </p>
-
-                        <p class="card-text">
-                            <strong>Address:</strong>
-                            @school.Address
-                        </p>
-
-                        <p class="card-text">
-                            <strong>Phone:</strong>
-                            @school.PhoneNo
-                        </p>
-
-                        <p class="card-text">
-                            <strong>Email:</strong>
-                            @school.EmailAddress
-                        </p>
-
-                        <p class="card-text">
-                            <strong>Proprietor:</strong>
-                            @school.ProprietorFullName
-                        </p>
-
-                        <p class="card-text">
-                            <strong>Head:</strong>
-                            @school.HeadFullName
-                        </p>
-                    </div>
-                </div>
+                <SchoolCard School="school"
+                            OnSelect="HandleSchoolSelected" />
             </div>
         }
     </div>
 }
 
+
+@if (selectedSchool is not null)
+{
+    <SchoolDetails School="selectedSchool" />
+}
+else
+{
+    <p class="text-muted">
+        Select a school to view its details.
+    </p>
+}
+
+
 @code {
     private List<SchoolDashboard77530.Models.School>? schools;
+
+    private SchoolDashboard77530.Models.School? selectedSchool;
 
     protected override async Task OnInitializedAsync()
     {
         schools = await SchoolService.GetSchoolsAsync();
+    }
+
+    private void HandleSchoolSelected(
+        SchoolDashboard77530.Models.School school)
+    {
+        selectedSchool = school;
     }
 }

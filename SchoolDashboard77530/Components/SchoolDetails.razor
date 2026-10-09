@@ -1,0 +1,55 @@
+﻿@using SchoolDashboard77530.Models
+
+
+@if (School is not null)
+{
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>School Details</h4>
+        </div>
+
+        <div class="card-body">
+
+            <p>
+                <strong>School ID:</strong>
+                @School.SchoolId
+            </p>
+
+            <p>
+                <strong>School Name:</strong>
+                @School.SchoolName
+            </p>
+
+            <p>
+                <strong>Address:</strong>
+                @School.Address
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                @School.PhoneNo
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                @School.EmailAddress
+            </p>
+
+            <p>
+                <strong>Proprietor:</strong>
+                @School.ProprietorFullName
+            </p>
+
+            <p>
+                <strong>Head:</strong>
+                @School.HeadFullName
+            </p>
+
+        </div>
+    </div>
+}
+@code {
+    [Parameter]
+    public SchoolDashboard77530.Models.School? School { get; set; }
+
+}
